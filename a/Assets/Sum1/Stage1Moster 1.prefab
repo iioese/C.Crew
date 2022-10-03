@@ -150,6 +150,8 @@ MonoBehaviour:
   random: 0
   punch: {fileID: 6342452521533751519, guid: 90d1c2b023db24a48b451ef3818bf248, type: 3}
   animator: {fileID: 0}
+  square: {fileID: 9149179478759681203, guid: 19d464903c9519546a9217caaad425a3, type: 3}
+  circle: {fileID: 1326345639391944106, guid: e35190b97e8bab84e850d2171e1e13be, type: 3}
 --- !u!95 &4773143875823553104
 Animator:
   serializedVersion: 4

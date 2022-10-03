@@ -13,6 +13,12 @@ public class PlayerScript : MonoBehaviour
     public int random;
 
     private GameObject target;
+    public GameObject square;
+
+    private GameObject num1;
+    private GameObject num2;
+
+    float dis = 0.35f;
 
     bool healmode;
 
@@ -30,14 +36,36 @@ public class PlayerScript : MonoBehaviour
 
     void setting()
     {
-        random = Random.Range(1, 10);
-        Debug.Log(random);
+        random = Random.Range(1, 15);
+        nummaker();
+    }
+
+    void nummaker()
+    {
+        Sprite[] sprites = Resources.LoadAll<Sprite>("number");
+        if (random > 9 && random <= 99)
+        {
+            int a = random / 10;
+            int b = random % 10;
+            num1 = Instantiate(square, new Vector2(transform.position.x - dis, transform.position.y + 2), transform.rotation);
+            num2 = Instantiate(square, new Vector2(transform.position.x + dis, transform.position.y + 2), transform.rotation);
+            SpriteRenderer spriteA = num1.GetComponent<SpriteRenderer>();
+            spriteA.sprite = sprites[a];
+            SpriteRenderer spriteB = num2.GetComponent<SpriteRenderer>();
+            spriteB.sprite = sprites[b];
+        }
+        else if (random > 0 && random <= 9)
+        {
+            num1 = Instantiate(square, new Vector2(transform.position.x, transform.position.y + 2), transform.rotation);
+            SpriteRenderer spriteR = num1.GetComponent<SpriteRenderer>();
+            spriteR.sprite = sprites[random];
+        }
     }
 
     void Start()
     {
         healmode = false;
-        heart = 1000000;
+        heart = 100;
         animator = GetComponent<Animator>();
     }
 
@@ -66,10 +94,34 @@ public class PlayerScript : MonoBehaviour
             }
             else if (target == this.gameObject && healmode == true)
             {
-                if (punch.GetComponent<PunchScript>().num == random)
+                if (punch.GetComponent<PunchScript>().result == random)
                 {
-                    heart+= random;
-                    random = -1;
+                    heart += random;
+                    if (random > 9 && random <= 99)
+                    {
+                        Destroy(num1);
+                        Destroy(num2);
+                    }
+                    else if (random > 0 && random <= 9)
+                    {
+                        Destroy(num1);
+                    }
+                    random = 0;
+                    punch.GetComponent<PunchScript>().re();
+                }
+                else
+                {
+                    Debug.Log("´Ù½Ã");
+                    if (random > 9 && random <= 99)
+                    {
+                        Destroy(num1);
+                        Destroy(num2);
+                    }
+                    else if (random > 0 && random <= 9)
+                    {
+                        Destroy(num1);
+                    }
+                    random = 0;
                     punch.GetComponent<PunchScript>().re();
                 }
                 healmode = false;
