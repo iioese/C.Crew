@@ -124,21 +124,21 @@ public class Stage1Monster : MonoBehaviour
                     OnDamaged();
                     setting();
                     heart--;
-                    Sprite[] sprites = Resources.LoadAll<Sprite>("number");
+                    Sprite[] sprites = Resources.LoadAll<Sprite>("hpbar");
                     if (heart == 2)
                     {
                         SpriteRenderer sprite1 = hpbar3.GetComponent<SpriteRenderer>();
-                        sprite1.sprite = sprites[10];
+                        sprite1.sprite = sprites[0];
                     }
                     else if (heart == 1)
                     {
                         SpriteRenderer sprite2 = hpbar2.GetComponent<SpriteRenderer>();
-                        sprite2.sprite = sprites[10];
+                        sprite2.sprite = sprites[0];
                     }
                     else if (heart == 0)
                     {
                         SpriteRenderer sprite1 = hpbar1.GetComponent<SpriteRenderer>();
-                        sprite1.sprite = sprites[10];
+                        sprite1.sprite = sprites[0];
                     }
                     animator.SetFloat("hit", heart);
                     punch.GetComponent<PunchScript>().re();
@@ -175,14 +175,14 @@ public class Stage1Monster : MonoBehaviour
 
         if (random > 9)
         {
-            Vector2 pos1 = new Vector2(transform.position.x - dis, transform.position.y + 4);
-            Vector2 pos2 = new Vector2(transform.position.x + dis, transform.position.y + 4);
+            Vector2 pos1 = new Vector2(transform.position.x - dis, transform.position.y + 3);
+            Vector2 pos2 = new Vector2(transform.position.x + dis, transform.position.y + 3);
             num1.transform.position = pos1;
             num2.transform.position = pos2;
         }
         else if (random <= 9)
         {
-            Vector2 pos1 = new Vector2(transform.position.x, transform.position.y + 4);
+            Vector2 pos1 = new Vector2(transform.position.x, transform.position.y + 3);
             num1.transform.position = pos1;
         }
 
